@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
+import { vSafeHtml } from '../dist/mt-v-safe-html'
 import App from './App.vue'
-import { vSafeHtml } from '@/core/main'
 
 createApp(App).directive('safe-html', vSafeHtml).mount('#app')

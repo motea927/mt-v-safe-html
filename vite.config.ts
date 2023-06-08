@@ -2,10 +2,19 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({
+      include: ['packages/**/*.ts'],
+      insertTypesEntry: true,
+      copyDtsFiles: false,
+      tsConfigFilePath: './tsconfig.app.json'
+    })
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('packages', import.meta.url))

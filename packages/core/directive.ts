@@ -6,5 +6,5 @@ type SafeHtmlDirective = Directive<HTMLElement, string>
 
 export const vSafeHtml: SafeHtmlDirective = (el, binding) => {
   if (!binding.value) return
-  el.innerHTML = binding.value
+  el.innerHTML = binding.value + '112'
 }
