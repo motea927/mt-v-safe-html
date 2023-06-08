@@ -8,7 +8,17 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('src', import.meta.url))
+      '@': fileURLToPath(new URL('packages', import.meta.url))
+    }
+  },
+
+  build: {
+    lib: {
+      // Could also be a dictionary or array of multiple entry points
+      entry: fileURLToPath(new URL('packages/core/main.ts', import.meta.url)),
+      name: 'mt-v-safe-html',
+      // the proper extensions will be added
+      fileName: 'mt-v-safe-html'
     }
   }
 })

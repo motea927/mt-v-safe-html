@@ -9,8 +9,7 @@
     "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint --cache --fix --ext .ts,.mjs,.cjs . && prettier --write -c src",
-    "format": "prettier --write src/",
+    "lint": "eslint --cache --fix --ext .ts,.mjs,.cjs . && prettier --write -c packages",
     "prepare": "husky install"
   },
   "dependencies": {
