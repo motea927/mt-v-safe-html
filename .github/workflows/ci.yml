@@ -4,12 +4,12 @@ on:
     paths-ignore:
       - 'docs/**'
     branches:
-      - master
+      - main
   pull_request:
     paths-ignore:
       - 'docs/**'
     branches:
-      - master
+      - main
 
 jobs:
   build:
