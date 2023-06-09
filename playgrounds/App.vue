@@ -40,4 +40,5 @@ const linkHtmlString = ref(
   </a>`
 )
 const sanitizeConfig = { ADD_ATTR: ['target'] }
+console.log('release test')
 </script>
