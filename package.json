@@ -1,7 +1,13 @@
 {
   "name": "mt-v-safe-html",
+  "description": "A lightweight, flexible, and robust XSS sanitizer's Vue directive based on DOMPurify",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
+  "author": {
+    "name": "motea927",
+    "email": "motea927@yahoo.com.tw"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "pnpm run build-only --watch & vite",
     "build": "run-p type-check build-only",
@@ -12,6 +18,19 @@
     "lint": "eslint --cache --fix --ext .ts,.mjs,.cjs . && prettier --write -c packages",
     "prepare": "husky install"
   },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/mt-v-safe-html.umd.js",
+  "module": "./dist/mt-v-safe-html.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/mt-v-safe-html.mjs",
+      "require": "./dist/mt-v-safe-html.umd.js"
+    }
+  },
+  "types": "./dist/main.d.ts",
   "dependencies": {
     "@types/dompurify": "^3.0.2",
     "dompurify": "^3.0.3",
