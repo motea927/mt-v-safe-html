@@ -1,1 +1,1 @@
-export { vSafeHtml } from './directive'
+export { vSafeHtml, createDirective } from './directive'
