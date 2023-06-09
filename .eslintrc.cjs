@@ -17,5 +17,6 @@ module.exports = {
     'unicorn/filename-case': 0,
     'unicorn/no-null': 0,
     'import/named': 0
-  }
+  },
+  ignorePatterns: ['**/dist/**.*']
 }
