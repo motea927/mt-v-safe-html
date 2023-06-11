@@ -6,7 +6,7 @@
     "playgrounds/**/*.vue",
     "packages/**/*"
   ],
-  "exclude": ["src/**/__tests__/*"],
+  "exclude": ["packages/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",

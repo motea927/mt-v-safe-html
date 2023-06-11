@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.app.json",
-  "exclude": [],
+  "exclude": ["playgrounds/**/*", "playgrounds/**/*.vue"],
   "compilerOptions": {
     "composite": true,
     "lib": [],
