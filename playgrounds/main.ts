@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { createDirective } from '../dist/main'
+import { createDirective } from '../dist/mt-v-safe-html'
 import App from './App.vue'
 
 createApp(App)
@@ -7,5 +7,4 @@ createApp(App)
     'safe-html',
     createDirective({ defaultString: 'globalDefaultString' })
   )
-
   .mount('#app')

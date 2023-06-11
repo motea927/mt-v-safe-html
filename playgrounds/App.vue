@@ -27,11 +27,22 @@
         }"
       ></div>
     </div>
+
+    <div>
+      <h2>data set</h2>
+      <div v-safe-html="dataSetHtmlString"></div>
+    </div>
+
+    <div>
+      <h2>components</h2>
+      <UseSafeHtml :html-string="inValidHtmlString" :as="'span'"></UseSafeHtml>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { UseSafeHtml } from '../dist/mt-v-safe-html'
 const inValidHtmlString = ref(`<div> invalid</div></div>`)
 const validHtmlString = ref(`<div> valid alert('valid');</div>`)
 const linkHtmlString = ref(
@@ -40,5 +51,8 @@ const linkHtmlString = ref(
   </a>`
 )
 const sanitizeConfig = { ADD_ATTR: ['target'] }
-console.log('release test')
+
+const dataSetHtmlString = ref(`
+  <div data-test="{"1":1}">dataset</div>
+`)
 </script>
