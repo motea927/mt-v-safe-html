@@ -1,19 +1,9 @@
 export default defineAppConfig({
   docus: {
-    title: 'Docus',
-    description: 'The best place to start your documentation.',
-    image:
-      'https://user-images.githubusercontent.com/904724/185365452-87b7ca7b-6030-4813-a2db-5e65c785bf88.png',
+    title: 'mt-v-safe-html',
+    description: `A lightweight, flexible, and robust XSS sanitizer's Vue directive based on DOMPurify`,
     socials: {
-      twitter: 'nuxtstudio',
-      github: 'nuxt-themes/docus'
-    },
-    github: {
-      dir: '.starters/default/content',
-      branch: 'main',
-      repo: 'docus',
-      owner: 'nuxt-themes',
-      edit: true
+      github: 'motea927/mt-v-safe-html'
     },
     aside: {
       level: 0,
@@ -27,16 +17,16 @@ export default defineAppConfig({
     header: {
       logo: true,
       showLinkIcon: true,
-      exclude: [],
-      fluid: true
+      exclude: []
     },
     footer: {
       iconLinks: [
         {
-          href: 'https://nuxt.com',
-          icon: 'simple-icons:nuxtdotjs'
+          href: 'https://www.npmjs.com/package/mt-v-safe-html',
+          icon: 'logos:npm-icon'
         }
-      ]
+      ],
+      credits: false
     }
   }
 })
