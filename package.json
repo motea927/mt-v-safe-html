@@ -9,7 +9,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "pnpm run build-only --watch & vite",
+    "dev:core": "pnpm run build-only --watch & vite",
+    "dev:docs": "pnpm run build-only --watch & pnpm -r --filter ./packages/docs run dev",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "test:unit": "vitest",
@@ -22,12 +23,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/mt-v-safe-html.umd.js",
-  "module": "./dist/mt-v-safe-html.mjs",
+  "main": "./dist/mt-v-safe-html.umd.cjs",
+  "module": "./dist/mt-v-safe-html.js",
   "exports": {
     ".": {
-      "import": "./dist/mt-v-safe-html.mjs",
-      "require": "./dist/mt-v-safe-html.umd.js"
+      "import": "./dist/mt-v-safe-html.js",
+      "require": "./dist/mt-v-safe-html.umd.cjs"
     }
   },
   "types": "./dist/main.d.ts",
