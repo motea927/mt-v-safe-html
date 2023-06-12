@@ -9,7 +9,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "pnpm run build-only --watch & vite",
+    "dev:core": "pnpm run build-only --watch & vite",
+    "dev:docs": "pnpm run build-only --watch & pnpm -r --filter ./packages/docs run dev",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "test:unit": "vitest",
