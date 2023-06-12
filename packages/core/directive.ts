@@ -1,61 +1,37 @@
 import type { Directive } from 'vue'
-import { isValidate } from './validate'
 import type { BindingObj, Options } from './shared'
 import {
-  checkIsBindingObj,
   getDefaultString,
   sanitizeHtml,
   hasGlobalOptions,
-  setGlobalOptions
+  setGlobalOptions,
+  handleDefaultString,
+  getBindingValue
 } from './shared'
 
-export type SafeHtmlDirective = Directive<HTMLElement, string | BindingObj>
+export type SafeHtmlDirective = Directive<
+  HTMLElement,
+  string | (() => string) | BindingObj
+>
 
 export const vSafeHtml: SafeHtmlDirective = (el, binding) => {
   if (!binding.value) return
 
-  const isBindingObj = checkIsBindingObj(binding.value)
+  const bindingValue = getBindingValue(binding.value)
+  const defaultString =
+    typeof binding.value === 'string' || typeof binding.value === 'function'
+      ? getDefaultString()
+      : getDefaultString(binding.value.defaultString)
+  const sanitizeConfig =
+    typeof binding.value === 'string' || typeof binding.value === 'function'
+      ? undefined
+      : binding.value.sanitizeConfig
 
-  // string
-  if (!isBindingObj) {
-    const bindingValue = binding.value as string
-    const defaultString = getDefaultString()
-    const hasDefaultString = defaultString !== undefined
-
-    if (hasDefaultString && !isValidate(bindingValue)) {
-      const sanitizeDefaultResult = sanitizeHtml(defaultString)
-
-      el.innerHTML = sanitizeDefaultResult
-      return
-    }
-
-    const sanitizeResult = sanitizeHtml(bindingValue)
-
-    el.innerHTML = sanitizeResult
+  if (handleDefaultString(el, bindingValue, defaultString, sanitizeConfig)) {
     return
   }
 
-  // obj
-  const bindingObj = binding.value as BindingObj
-  const componentDefaultString = getDefaultString(bindingObj.defaultString)
-
-  const hasDefaultString = componentDefaultString !== undefined
-
-  if (hasDefaultString && !isValidate(bindingObj.htmlString)) {
-    const sanitizeDefaultResult = sanitizeHtml(
-      componentDefaultString,
-      bindingObj.sanitizeConfig
-    )
-
-    el.innerHTML = sanitizeDefaultResult
-    return
-  }
-
-  const sanitizeResult = sanitizeHtml(
-    bindingObj.htmlString,
-    bindingObj.sanitizeConfig
-  )
-
+  const sanitizeResult = sanitizeHtml(bindingValue, sanitizeConfig)
   el.innerHTML = sanitizeResult
 }
 
