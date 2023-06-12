@@ -23,12 +23,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/mt-v-safe-html.umd.js",
-  "module": "./dist/mt-v-safe-html.mjs",
+  "main": "./dist/mt-v-safe-html.umd.cjs",
+  "module": "./dist/mt-v-safe-html.js",
   "exports": {
     ".": {
-      "import": "./dist/mt-v-safe-html.mjs",
-      "require": "./dist/mt-v-safe-html.umd.js"
+      "import": "./dist/mt-v-safe-html.js",
+      "require": "./dist/mt-v-safe-html.umd.cjs"
     }
   },
   "types": "./dist/main.d.ts",
