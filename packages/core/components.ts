@@ -1,6 +1,6 @@
 import { defineComponent, h } from 'vue'
 import type { BindingObj } from './shared'
-import { getDefaultString, sanitizeHtml } from './shared'
+import { getDefaultString, sanitizeHtml, getBindingValue } from './shared'
 import { isValidate } from './validate'
 
 type Props = BindingObj & {
@@ -24,8 +24,9 @@ export const UseSafeHtml = defineComponent<Props>({
   render() {
     const componentDefaultString = getDefaultString(this.defaultString)
     const hasDefaultString = componentDefaultString !== undefined
+    const bindingValue = getBindingValue(this.htmlString)
 
-    if (hasDefaultString && !isValidate(this.htmlString)) {
+    if (hasDefaultString && !isValidate(bindingValue)) {
       const sanitizeDefaultResult = sanitizeHtml(
         componentDefaultString,
         this.sanitizeConfig
@@ -36,7 +37,7 @@ export const UseSafeHtml = defineComponent<Props>({
       })
     }
 
-    const sanitizeResult = sanitizeHtml(this.htmlString, this.sanitizeConfig)
+    const sanitizeResult = sanitizeHtml(bindingValue, this.sanitizeConfig)
 
     return h(this.as || 'div', {
       innerHTML: sanitizeResult
