@@ -1,4 +1,5 @@
 import type { Directive } from 'vue'
+import { watchEffect } from 'vue'
 import type { BindingObj, Options } from './shared'
 import {
   getDefaultString,
@@ -14,25 +15,38 @@ export type SafeHtmlDirective = Directive<
   string | (() => string) | BindingObj
 >
 
-export const vSafeHtml: SafeHtmlDirective = (el, binding) => {
-  if (!binding.value) return
+const stopWatchMap = new WeakMap<HTMLElement, () => void>()
 
-  const bindingValue = getBindingValue(binding.value)
-  const defaultString =
-    typeof binding.value === 'string' || typeof binding.value === 'function'
-      ? getDefaultString()
-      : getDefaultString(binding.value.defaultString)
-  const sanitizeConfig =
-    typeof binding.value === 'string' || typeof binding.value === 'function'
-      ? undefined
-      : binding.value.sanitizeConfig
+export const vSafeHtml: SafeHtmlDirective = {
+  beforeMount(el, binding) {
+    const stopWatch = watchEffect(() => {
+      if (!binding.value) return
 
-  if (handleDefaultString(el, bindingValue, defaultString, sanitizeConfig)) {
-    return
+      const bindingValue = getBindingValue(binding.value)
+      const defaultString =
+        typeof binding.value === 'string' || typeof binding.value === 'function'
+          ? getDefaultString()
+          : getDefaultString(binding.value.defaultString)
+      const sanitizeConfig =
+        typeof binding.value === 'string' || typeof binding.value === 'function'
+          ? undefined
+          : binding.value.sanitizeConfig
+
+      if (
+        handleDefaultString(el, bindingValue, defaultString, sanitizeConfig)
+      ) {
+        return
+      }
+
+      const sanitizeResult = sanitizeHtml(bindingValue, sanitizeConfig)
+      el.innerHTML = sanitizeResult
+    })
+    stopWatchMap.set(el, stopWatch)
+  },
+  beforeUnmount(el) {
+    stopWatchMap.get(el)?.()
+    stopWatchMap.delete(el)
   }
-
-  const sanitizeResult = sanitizeHtml(bindingValue, sanitizeConfig)
-  el.innerHTML = sanitizeResult
 }
 
 export const createDirective = (options?: Options) => {
