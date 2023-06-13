@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { UseSafeHtml } from '../dist/mt-v-safe-html'
+import { UseSafeHtml } from '../dist/main'
 const inValidHtmlString = ref(`<div> invalid</div></div>`)
 const validHtmlString = ref(`<div> valid alert('valid');</div>`)
 const linkHtmlString = ref(

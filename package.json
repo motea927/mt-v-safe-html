@@ -15,6 +15,7 @@
     "build:docs": "pnpm -r --filter ./packages/docs run build",
     "preview": "vite preview",
     "test:unit": "vitest",
+    "coverage": "vitest run --coverage",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint --cache --fix --ext .ts,.mjs,.cjs . && prettier --write -c packages",
@@ -24,12 +25,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/mt-v-safe-html.umd.cjs",
-  "module": "./dist/mt-v-safe-html.js",
+  "main": "./dist/main.umd.cjs",
+  "module": "./dist/main.js",
   "exports": {
     ".": {
-      "import": "./dist/mt-v-safe-html.js",
-      "require": "./dist/mt-v-safe-html.umd.cjs"
+      "import": "./dist/main.js",
+      "require": "./dist/main.umd.cjs"
     }
   },
   "types": "./dist/main.d.ts",
@@ -45,6 +46,7 @@
     "@types/jsdom": "^21.1.1",
     "@types/node": "^18.16.8",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vitest/coverage-c8": "^0.32.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/test-utils": "^2.3.2",

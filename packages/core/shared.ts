@@ -32,7 +32,7 @@ export function sanitizeHtml(html: string, sanitizeConfig?: SanitizeConfig) {
     : sanitize(html)
 }
 
-export function setGlobalOptions(options: Options) {
+export function setGlobalOptions(options: Options | undefined) {
   globalOptions = options
 }
 
