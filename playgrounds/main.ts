@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
-import { createDirective } from '../dist/mt-v-safe-html'
+import { createDirective } from '../dist/main'
 import App from './App.vue'
 
 const i18n = createI18n({

@@ -24,12 +24,10 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: fileURLToPath(
-        new URL('packages/core/mt-v-safe-html.ts', import.meta.url)
-      ),
+      entry: fileURLToPath(new URL('packages/core/main.ts', import.meta.url)),
       name: 'mt-v-safe-html',
       // the proper extensions will be added
-      fileName: 'mt-v-safe-html'
+      fileName: 'main'
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
