@@ -1,4 +1,5 @@
 import { defineComponent, h } from 'vue'
+import type { PropType } from 'vue'
 import type { BindingObj } from './shared'
 import { getDefaultString, sanitizeHtml, getBindingValue } from './shared'
 import { isValidate } from './validate'
@@ -12,21 +13,27 @@ type Props = BindingObj & {
   as?: object | string
 }
 
-export const UseSafeHtml = defineComponent<Props>({
+export const UseSafeHtml = defineComponent({
   name: 'UseSafeHtml',
-  props: [
-    'htmlString',
-    'defaultString',
-    'sanitizeConfig',
-    'as'
-  ] as unknown as undefined,
-
+  props: {
+    htmlString: {
+      type: [String, Function] as PropType<Props['htmlString']>,
+      required: true
+    },
+    defaultString: String as PropType<Props['defaultString']>,
+    sanitizeConfig: Object as PropType<Props['sanitizeConfig']>,
+    as: String as PropType<Props['as']>
+  },
+  computed: {
+    bindingValue(): string {
+      return getBindingValue(this.htmlString)
+    }
+  },
   render() {
     const componentDefaultString = getDefaultString(this.defaultString)
     const hasDefaultString = componentDefaultString !== undefined
-    const bindingValue = getBindingValue(this.htmlString)
 
-    if (hasDefaultString && !isValidate(bindingValue)) {
+    if (hasDefaultString && !isValidate(this.bindingValue)) {
       const sanitizeDefaultResult = sanitizeHtml(
         componentDefaultString,
         this.sanitizeConfig
@@ -37,7 +44,7 @@ export const UseSafeHtml = defineComponent<Props>({
       })
     }
 
-    const sanitizeResult = sanitizeHtml(bindingValue, this.sanitizeConfig)
+    const sanitizeResult = sanitizeHtml(this.bindingValue, this.sanitizeConfig)
 
     return h(this.as || 'div', {
       innerHTML: sanitizeResult
