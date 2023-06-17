@@ -35,13 +35,11 @@
 
     <div>
       <h2>components</h2>
-      <UseSafeHtml :html-string="inValidHtmlString" :as="'span'"></UseSafeHtml>
     </div>
 
     <div>
       <h2>i18n</h2>
-      <p v-html="$t('message')"></p>
-      <p v-safe-html="() => $t('message')"></p>
+      <p v-html="$i18nHtml('message')"></p>
       <button @click="handleClickChangeMessage">change message</button>
     </div>
   </div>
@@ -50,7 +48,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { UseSafeHtml } from '../dist/main'
+
 const inValidHtmlString = ref(`<div> invalid</div></div>`)
 const validHtmlString = ref(`<div> valid alert('valid');</div>`)
 const linkHtmlString = ref(
