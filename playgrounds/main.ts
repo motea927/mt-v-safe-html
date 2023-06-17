@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
-import { createI18nHtml } from '../dist/main'
+import { createI18nHtml, createSafeHtml } from '../dist/main'
 import App from './App.vue'
 
 const i18n = createI18n({
@@ -16,5 +16,5 @@ const i18n = createI18n({
 
 createApp(App)
   .use(i18n)
-  .use(createI18nHtml, { defaultString: 'globalDefaultString' })
+  .use(createSafeHtml, { defaultString: 'globalDefaultString' })
   .mount('#app')
