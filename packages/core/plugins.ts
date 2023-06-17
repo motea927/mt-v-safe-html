@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { Options, BindingObj } from './shared'
+import type { Options, BindingObj, BindingI18nObj } from './shared'
 import {
   setGlobalOptions,
   getBindingValue,
@@ -10,7 +10,7 @@ import {
 } from './shared'
 
 const generateHtml =
-  (getContentText: (binding: string | BindingObj) => string) =>
+  (getContentText: (binding: string | BindingObj | BindingI18nObj) => string) =>
   (binding: string | BindingObj): string => {
     if (!binding) return ''
 

@@ -17,6 +17,10 @@ export type BindingObj = {
   htmlString: string | (() => string)
 } & Options
 
+export type BindingI18nObj = Omit<BindingObj, 'htmlString'> & {
+  htmlString: string
+}
+
 const globalOptions = ref<Options | undefined>()
 
 export function getDefaultString(
