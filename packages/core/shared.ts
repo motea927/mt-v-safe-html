@@ -1,5 +1,6 @@
 import DOMPurify from 'dompurify'
 import type { Config } from 'dompurify'
+import { ref } from 'vue'
 import { isValidate } from './validate'
 
 type SanitizeConfig = Config & {
@@ -16,41 +17,40 @@ export type BindingObj = {
   htmlString: string | (() => string)
 } & Options
 
-let globalOptions: Options | undefined
+const globalOptions = ref<Options | undefined>()
 
 export function getDefaultString(
   componentDefaultString?: string
 ): string | undefined {
-  return componentDefaultString ?? globalOptions?.defaultString
+  return componentDefaultString ?? globalOptions.value?.defaultString
 }
 
 const { sanitize } = DOMPurify
 export function sanitizeHtml(html: string, sanitizeConfig?: SanitizeConfig) {
-  const overrideSanitizeConfig = globalOptions?.sanitizeConfig || sanitizeConfig
+  const overrideSanitizeConfig =
+    globalOptions.value?.sanitizeConfig || sanitizeConfig
   return overrideSanitizeConfig
     ? sanitize(html, overrideSanitizeConfig)
     : sanitize(html)
 }
 
 export function setGlobalOptions(options: Options | undefined) {
-  globalOptions = options
+  globalOptions.value = options
 }
 
 export function hasGlobalOptions(): boolean {
-  return globalOptions !== undefined
+  return globalOptions.value !== undefined
 }
 
 // Handle default string
 export function handleDefaultString(
-  el: HTMLElement,
   bindingValue: string,
   defaultString: string | undefined,
   sanitizeConfig?: Options['sanitizeConfig']
 ) {
   if (defaultString && !isValidate(bindingValue)) {
     const sanitizeDefaultResult = sanitizeHtml(defaultString, sanitizeConfig)
-    el.innerHTML = sanitizeDefaultResult
-    return true
+    return sanitizeDefaultResult
   }
   return false
 }

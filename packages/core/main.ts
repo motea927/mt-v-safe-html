@@ -1,3 +1,2 @@
 export { setGlobalOptions } from './shared'
-export { vSafeHtml, createDirective } from './directive'
-export { UseSafeHtml } from './components'
+export { createI18nHtml, createSafeHtml } from './plugins'

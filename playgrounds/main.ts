@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
-import { createDirective } from '../dist/main'
+import { createI18nHtml, createSafeHtml } from '../dist/main'
 import App from './App.vue'
 
 const i18n = createI18n({
@@ -15,9 +15,6 @@ const i18n = createI18n({
 })
 
 createApp(App)
-  .directive(
-    'safe-html',
-    createDirective({ defaultString: 'globalDefaultString' })
-  )
   .use(i18n)
+  .use(createSafeHtml, { defaultString: 'globalDefaultString' })
   .mount('#app')
