@@ -9,9 +9,9 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      include: ['packages/**/*.ts'],
+      include: ['packages/core/*.ts'],
       insertTypesEntry: true,
-      copyDtsFiles: false,
+      copyDtsFiles: true,
       tsConfigFilePath: './tsconfig.app.json'
     })
   ],
