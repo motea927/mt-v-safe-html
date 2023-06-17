@@ -1,6 +1,6 @@
 # mt-v-safe-html
 
-A lightweight, flexible, and robust XSS sanitizer's Vue directive based on [DOMPurify](https://github.com/cure53/DOMPurify).
+A lightweight, flexible, and robust XSS sanitizer's Vue plugin based on [DOMPurify](https://github.com/cure53/DOMPurify).
 
 > **Warning**: The library is under development. Recommend not to use.
 
@@ -14,27 +14,6 @@ This had some miserable experiences.
 
 So, why not to use a robust mechanism? Just set a default string, when we have seen default string, it represent our v-html has some error.
 
-```ts
-// main.ts
-import { createApp } from 'vue'
-import { createDirective } from 'mt-v-safe-html'
-import App from './App.vue'
-
-createApp(App)
-  .directive(
-    'safe-html',
-    createDirective({ defaultString: 'Please update your text'})
-  )
-  .mount('#app')
-```
-
-```vue
-<template>
-  <div v-safe-html="'<div>something</div></div>'"></div>
-  <div v-safe-html="() => $t('contact-us')">
-  </div>
-</template>
-```
 > **Note**: i18n crash only occur in production.
 
 ## 🚀 Features
@@ -48,13 +27,59 @@ createApp(App)
 
 Refer to [documentations](https://mt-v-safe-html.morty.tw) for more details.
 
-### global directive
+### global usage
+#### safeHtml
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { createSafeHtml } from 'mt-v-safe-html'
 
-todo
+import App from './App.vue'
 
-### import on demand
+createApp(App)
+  .use(createSafeHtml, { defaultString: 'Please update your text' }) 
+  .mount('#app')
+```
 
-todo
+```vue
+<template>
+  <div v-html="$safeHtml('<div>something</div></div>')"></div>
+  <div v-html="$safeHtml(() => $t('contact-us'))">
+  </div>
+</template>
+```
+
+#### i18nHtml
+i18nHtml is an syntax sugar for use, just use like `$t`, make sure you already install `vue-i18n`
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { createI18nHtml } from 'mt-v-safe-html'
+
+import App from './App.vue'
+
+const i18n = createI18n({
+  globalInjection: true,
+  legacy: false,
+  messages: {
+    en: {
+      'contact-us': 'please contact us some@example.com'
+    }
+  }
+})
+
+createApp(App)
+  .use(i18n)
+  .use(createI18nHtml, { defaultString: 'Please update your text' }) 
+  .mount('#app')
+```
+
+```vue
+<template>
+  <div v-html="$i18nHtml('contact-us')"></div>
+</template>
+```
 
 ## 📦 Install
 

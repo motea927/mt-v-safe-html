@@ -1,6 +1,6 @@
 {
   "name": "mt-v-safe-html",
-  "description": "A lightweight, flexible, and robust XSS sanitizer's Vue directive based on DOMPurify",
+  "description": "A lightweight, flexible, and robust XSS sanitizer's Vue plugin based on DOMPurify",
   "version": "0.0.0",
   "private": false,
   "author": {
