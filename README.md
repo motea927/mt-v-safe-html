@@ -1,7 +1,23 @@
+
+<p align="center">
+  <a href="https://mt-v-safe-html.morty.tw">
+  <img src="https://raw.githubusercontent.com/motea927/mt-v-safe-html/main/packages/docs/public/mt-v-safe-html.png" style="width: 200px; height:auto;">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/mt-v-safe-html">
+    <img src="https://img.shields.io/npm/v/mt-v-safe-html">
+  </a>
+  <a href="https://github.com/motea927/mt-v-safe-html/actions/workflows/ci.yml">
+    <img src="https://github.com/motea927/mt-v-safe-html/actions/workflows/ci.yml/badge.svg">
+  </a>
+</p>
+
 # mt-v-safe-html
 
 A lightweight, flexible, and robust XSS sanitizer's Vue plugin based on [DOMPurify](https://github.com/cure53/DOMPurify).
-
+<!-- https://raw.githubusercontent.com/motea927/mt-v-safe-html/main/packages/docs/public/mt-v-safe-html.png -->
 > **Warning**: The library is under development. Recommend not to use.
 
 ## 💪 Motivation
