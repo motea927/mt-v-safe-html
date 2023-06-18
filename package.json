@@ -35,14 +35,12 @@
   },
   "types": "./dist/main.d.ts",
   "dependencies": {
-    "@types/dompurify": "^3.0.2",
-    "dompurify": "^3.0.3",
-    "vue": "^3.3.2",
-    "vue-i18n": "9.3.0-beta.19"
+    "dompurify": "^3.0.3"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
     "@tsconfig/node18": "^2.0.1",
+    "@types/dompurify": "^3.0.2",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^18.16.8",
     "@vitejs/plugin-vue": "^4.2.3",
@@ -64,6 +62,8 @@
     "vite": "^4.3.5",
     "vite-plugin-dts": "^2.3.0",
     "vitest": "^0.31.0",
+    "vue": "^3.3.2",
+    "vue-i18n": "9.3.0-beta.19",
     "vue-tsc": "^1.6.4"
   }
 }
