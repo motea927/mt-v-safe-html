@@ -37,9 +37,9 @@ const generateHtml =
     return sanitizeResult
   }
 
-export const $safeHtml = generateHtml(getBindingValue)
+const $safeHtml = generateHtml(getBindingValue)
 
-export const $i18nHtml = generateHtml((binding) => {
+const $i18nHtml = generateHtml((binding) => {
   if (!useI18n) {
     console.warn(`[mt-v-safe-html]: can not find vue-i18n`)
     return ''
