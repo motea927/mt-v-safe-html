@@ -11,7 +11,7 @@ export default defineConfig({
     dts({
       include: ['packages/core/*.ts'],
       insertTypesEntry: true,
-      copyDtsFiles: true,
+      copyDtsFiles: false,
       tsConfigFilePath: './tsconfig.app.json'
     })
   ],
