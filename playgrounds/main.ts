@@ -17,4 +17,5 @@ const i18n = createI18n({
 createApp(App)
   .use(i18n)
   .use(createSafeHtml, { defaultString: 'globalDefaultString' })
+  .use(createI18nHtml)
   .mount('#app')
