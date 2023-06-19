@@ -15,7 +15,8 @@ export default defineAppConfig({
       fluid: true
     },
     header: {
-      logo: true,
+      // logo: true,
+      title: 'mt-v-safe-html',
       showLinkIcon: true,
       exclude: []
     },

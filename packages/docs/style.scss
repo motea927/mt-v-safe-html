@@ -1,0 +1,8 @@
+.section a .title::before {
+  content: '';
+  display: inline-block;
+  background: url('/mt-v-safe-html.png') center / 30px 30px no-repeat;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
