@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { isValidate, countTags } from '../validate'
+import { isValidate, countTags } from '../'
 
 describe('validate.ts', () => {
   test.each([

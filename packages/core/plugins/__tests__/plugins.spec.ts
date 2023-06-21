@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import { createI18n } from 'vue-i18n'
-import type { Options, BindingObj } from '../shared'
-import { setGlobalOptions, createSafeHtml, createI18nHtml } from '../index'
+import type { Options, BindingObj } from '../../shared'
+import { setGlobalOptions, createSafeHtml, createI18nHtml } from '../../index'
 
 beforeEach(() => {
   setGlobalOptions(undefined)

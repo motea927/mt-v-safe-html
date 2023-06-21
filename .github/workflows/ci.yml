@@ -5,11 +5,13 @@ on:
       - 'docs/**'
     branches:
       - main
+      - beta
   pull_request:
     paths-ignore:
       - 'docs/**'
     branches:
       - main
+      - beta
 
 jobs:
   build:
@@ -106,4 +108,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release --branches main
+        run: npx semantic-release --branches ${GITHUB_REF#refs/heads/}

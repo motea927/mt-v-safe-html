@@ -18,7 +18,6 @@
 
 A lightweight, flexible, and robust XSS sanitizer's Vue plugin based on [DOMPurify](https://github.com/cure53/DOMPurify).
 <!-- https://raw.githubusercontent.com/motea927/mt-v-safe-html/main/packages/docs/public/mt-v-safe-html.png -->
-> **Warning**: The library is under development. Recommend not to use.
 
 ## 💪 Motivation
 For any commercial projects, we often had to provide html configuration (maybe from API) for customers, but there is a worry our customer may use error syntax or unintentionally copy xss syntax from the Internet.
