@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
-import { createI18nHtml, createSafeHtml } from '../dist/main'
+import { createI18nHtml, createSafeHtml } from 'mt-v-safe-html'
 import App from './App.vue'
 
 const i18n = createI18n({
