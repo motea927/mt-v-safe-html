@@ -7,8 +7,11 @@ export const countTags = (str: string): number => {
   return matches === null ? 0 : matches.length
 }
 
-export const isValidate = (htmlString: string): boolean => {
+export const isValidate = (
+  htmlString: string,
+  sanitizeFunc = sanitize
+): boolean => {
   const originalTagCounts = countTags(htmlString)
-  const sanitizeTagCounts = countTags(sanitize(htmlString))
+  const sanitizeTagCounts = countTags(sanitizeFunc(htmlString))
   return originalTagCounts === sanitizeTagCounts
 }

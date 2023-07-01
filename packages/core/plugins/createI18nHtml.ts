@@ -1,5 +1,6 @@
 import type { App } from 'vue'
 import { useI18n } from 'vue-i18n'
+import DOMPurify from 'dompurify'
 import { setGlobalOptions, getBindingValue } from '../shared'
 import type { Options } from '../shared'
 import { generateHtml } from './generateHtml'
@@ -12,7 +13,7 @@ const $i18nHtml = generateHtml((binding) => {
   const { t } = useI18n()
   const i18nContentKey = getBindingValue(binding)
   return getBindingValue(() => t(i18nContentKey))
-})
+}, DOMPurify.sanitize)
 
 export const createI18nHtml = {
   install: (app: App, options?: Options) => {
