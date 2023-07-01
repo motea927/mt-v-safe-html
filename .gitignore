@@ -27,3 +27,11 @@ coverage
 *.sln
 *.sw?
 .eslintcache
+
+# Nuxt
+.nuxt
+.output
+.vercel_build_output
+.build-*
+.env
+.netlify

@@ -9,25 +9,26 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      include: ['packages/core/*.ts'],
-      insertTypesEntry: true,
-      copyDtsFiles: false,
-      tsConfigFilePath: './tsconfig.app.json'
+      include: ['**/*.ts'],
+      exclude: ['dist/**'],
+      tsConfigFilePath: fileURLToPath(
+        new URL('../../tsconfig.app.json', import.meta.url)
+      )
     })
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('packages', import.meta.url))
+      '@/core': fileURLToPath(new URL('.', import.meta.url))
     }
   },
 
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: fileURLToPath(new URL('packages/core/main.ts', import.meta.url)),
+      entry: fileURLToPath(new URL('index.ts', import.meta.url)),
       name: 'mt-v-safe-html',
       // the proper extensions will be added
-      fileName: 'main'
+      fileName: 'index'
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

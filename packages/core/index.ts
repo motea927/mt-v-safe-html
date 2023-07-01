@@ -1,7 +1,8 @@
 import type { BindingObj, BindingI18nObj } from './shared'
 
-export { setGlobalOptions } from './shared'
-export { createI18nHtml, createSafeHtml } from './plugins'
+export { setGlobalOptions, getBindingValue } from './shared'
+export type { Options } from './shared'
+export * from './plugins'
 
 export {}
 declare module 'vue' {
