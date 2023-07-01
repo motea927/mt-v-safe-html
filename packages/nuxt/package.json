@@ -23,6 +23,12 @@
       "defu"
     ]
   },
+  "release": {
+    "branches": [
+      "main",
+      "beta"
+    ]
+  },
   "scripts": {
     "prepack": "nuxt-module-build",
     "dev": "nuxi dev playground",

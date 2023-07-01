@@ -8,6 +8,12 @@
     "email": "motea927@yahoo.com.tw"
   },
   "license": "MIT",
+  "release": {
+    "branches": [
+      "main",
+      "beta"
+    ]
+  },
   "scripts": {
     "dev:core": "pnpm -r --filter ./packages/core run build:watch & pnpm -r --filter ./playgrounds/vite-vue3 dev",
     "dev:nuxt": "pnpm -r --filter ./packages/core run build:watch & pnpm -r --filter ./packages/nuxt dev",
