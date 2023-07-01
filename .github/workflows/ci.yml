@@ -41,7 +41,7 @@ jobs:
       - name: Cache dist
         uses: actions/cache@v3
         with:
-          path: /packages/core/dist
+          path: packages/core/dist
           key: ${{ github.sha }}
 
   build-nuxt:
@@ -68,7 +68,7 @@ jobs:
       - name: Restore core dist cache
         uses: actions/cache@v3
         with:
-          path: /packages/core/dist
+          path: packages/core/dist
           key: ${{ github.sha }}
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
@@ -78,7 +78,7 @@ jobs:
       - name: Cache nuxt dist
         uses: actions/cache@v3
         with:
-          path: /packages/nuxt/dist
+          path: packages/nuxt/dist
           key: ${{ github.sha }}
 
   test:
@@ -139,7 +139,7 @@ jobs:
       - name: Restore dist cache
         uses: actions/cache@v3
         with:
-          path: /packages/core/dist
+          path: packages/core/dist
           key: ${{ github.sha }}
       - name: Release
         env:
@@ -180,7 +180,7 @@ jobs:
       - name: Restore dist cache
         uses: actions/cache@v3
         with:
-          path: /packages/nuxt/dist
+          path: packages/nuxt/dist
           key: ${{ github.sha }}
       - name: Release
         env:
