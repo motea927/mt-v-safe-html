@@ -66,13 +66,13 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Build
-        run: pnpm run build:nuxt
       - name: Restore core dist cache
         uses: actions/cache@v3
         with:
           path: /packages/core/dist
           key: ${{ github.sha }}
+      - name: Build
+        run: pnpm run build:nuxt
       - name: Cache nuxt dist
         uses: actions/cache@v3
         with:
