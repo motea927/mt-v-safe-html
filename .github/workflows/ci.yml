@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       - name: Build
-        run: pnpm run build
+        run: pnpm run build:core
       - name: Cache dist
         uses: actions/cache@v3
         with:
@@ -68,7 +68,12 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Build
         run: pnpm run build:nuxt
-      - name: Cache dist
+      - name: Cache mt-v-safe-html dist
+        uses: actions/cache@v3
+        with:
+          path: /packages/core/dist
+          key: ${{ github.sha }}
+      - name: Cache nuxt dist
         uses: actions/cache@v3
         with:
           path: /packages/nuxt/dist
