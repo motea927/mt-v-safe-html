@@ -1,9 +1,8 @@
-import DOMPurify from 'dompurify'
-import type { Config } from 'dompurify'
+import type DOMPurify from 'dompurify'
 import { ref } from 'vue'
 import { isValidate } from './validate'
 
-type SanitizeConfig = Config & {
+type SanitizeConfig = DOMPurify.Config & {
   RETURN_DOM_FRAGMENT?: false | undefined
   RETURN_DOM?: false | undefined
 }
@@ -29,13 +28,16 @@ export function getDefaultString(
   return componentDefaultString ?? globalOptions.value?.defaultString
 }
 
-const { sanitize } = DOMPurify
-export function sanitizeHtml(html: string, sanitizeConfig?: SanitizeConfig) {
+export function sanitizeHtml(
+  html: string,
+  sanitizeConfig: SanitizeConfig,
+  sanitizeFun: typeof DOMPurify.sanitize
+) {
   const overrideSanitizeConfig =
     globalOptions.value?.sanitizeConfig || sanitizeConfig
   return overrideSanitizeConfig
-    ? sanitize(html, overrideSanitizeConfig)
-    : sanitize(html)
+    ? sanitizeFun(html, overrideSanitizeConfig)
+    : sanitizeFun(html)
 }
 
 export function setGlobalOptions(options: Options | undefined) {
@@ -50,10 +52,15 @@ export function hasGlobalOptions(): boolean {
 export function handleDefaultString(
   bindingValue: string,
   defaultString: string | undefined,
-  sanitizeConfig?: Options['sanitizeConfig']
+  sanitizeConfig: SanitizeConfig,
+  sanitizeFun: typeof DOMPurify.sanitize
 ) {
-  if (defaultString && !isValidate(bindingValue)) {
-    const sanitizeDefaultResult = sanitizeHtml(defaultString, sanitizeConfig)
+  if (defaultString && !isValidate(bindingValue, sanitizeFun)) {
+    const sanitizeDefaultResult = sanitizeHtml(
+      defaultString,
+      sanitizeConfig,
+      sanitizeFun
+    )
     return sanitizeDefaultResult
   }
   return false

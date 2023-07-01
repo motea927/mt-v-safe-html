@@ -5,11 +5,13 @@ on:
       - 'docs/**'
     branches:
       - main
+      - beta
   pull_request:
     paths-ignore:
       - 'docs/**'
     branches:
       - main
+      - beta
 
 jobs:
   build:
@@ -33,13 +35,50 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
       - name: Build
-        run: pnpm run build
+        run: pnpm run build:core
       - name: Cache dist
         uses: actions/cache@v3
         with:
-          path: dist
+          path: packages/core/dist
+          key: ${{ github.sha }}
+
+  build-nuxt:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        node: [18]
+
+    timeout-minutes: 10
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
+      - name: Restore core dist cache
+        uses: actions/cache@v3
+        with:
+          path: packages/core/dist
+          key: ${{ github.sha }}
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build
+        run: pnpm run build:nuxt
+      - name: Cache nuxt dist
+        uses: actions/cache@v3
+        with:
+          path: packages/nuxt/dist
           key: ${{ github.sha }}
 
   test:
@@ -100,10 +139,51 @@ jobs:
       - name: Restore dist cache
         uses: actions/cache@v3
         with:
-          path: dist
+          path: packages/core/dist
           key: ${{ github.sha }}
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release --branches main
+        run: npx semantic-release --branches ${GITHUB_REF#refs/heads/}
+
+  build-release-nuxt:
+    if: |
+      github.event_name == 'push' &&
+      contains(github.event.head_commit.message, 'nuxt')
+    needs:
+      - build
+      - build-nuxt
+      - test
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        node: [18]
+
+    timeout-minutes: 20
+    environment: release
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Restore dist cache
+        uses: actions/cache@v3
+        with:
+          path: packages/nuxt/dist
+          key: ${{ github.sha }}
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd packages/nuxt && npx semantic-release --branches ${GITHUB_REF#refs/heads/}

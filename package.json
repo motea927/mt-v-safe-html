@@ -8,36 +8,44 @@
     "email": "motea927@yahoo.com.tw"
   },
   "license": "MIT",
+  "release": {
+    "branches": [
+      "main",
+      "beta"
+    ]
+  },
   "scripts": {
-    "dev:core": "pnpm run build-only --watch & vite",
-    "dev:docs": "pnpm run build-only --watch & pnpm -r --filter ./packages/docs run dev",
-    "build": "run-p type-check build-only",
-    "build:docs": "pnpm -r --filter ./packages/docs run build",
-    "preview": "vite preview",
+    "dev:core": "pnpm -r --filter ./packages/core run build:watch & pnpm -r --filter ./playgrounds/vite-vue3 dev",
+    "dev:nuxt": "pnpm -r --filter ./packages/core run build:watch & pnpm -r --filter ./packages/nuxt dev",
+    "dev:docs": "pnpm -r --filter ./docs run dev",
+    "build:core": "pnpm -r --filter ./packages/core run build",
+    "build:nuxt": "pnpm -r --filter ./packages/nuxt run dev:build && pnpm -r --filter ./packages/nuxt run prepack",
+    "build:docs": "pnpm -r --filter ./docs run build",
     "test:unit": "vitest",
     "coverage": "vitest run --coverage",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint --cache --fix --ext .ts,.mjs,.cjs . && prettier --write -c packages",
     "prepare": "husky install"
   },
   "type": "module",
   "files": [
-    "dist"
+    "packages/core/dist"
   ],
-  "main": "./dist/main.umd.cjs",
-  "module": "./dist/main.js",
+  "main": "./packages/core/dist/index.umd.cjs",
+  "module": "./packages/core/dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/main.js",
-      "require": "./dist/main.umd.cjs"
-    }
+      "types": "./packages/core/dist/index.d.ts",
+      "import": "./packages/core/dist/index.js",
+      "require": "./packages/core/dist/index.umd.cjs"
+    },
+    "./*": "./packages/core/dist/*"
   },
-  "types": "./dist/main.d.ts",
+  "types": "./packages/core/dist/index.d.ts",
   "dependencies": {
     "dompurify": "^3.0.3"
   },
   "devDependencies": {
+    "@nuxt/devtools": "^0.6.6",
     "@rushstack/eslint-patch": "^1.2.0",
     "@tsconfig/node18": "^2.0.1",
     "@types/dompurify": "^3.0.2",
@@ -55,6 +63,7 @@
     "husky": "^8.0.3",
     "jsdom": "^22.0.0",
     "npm-run-all": "^4.1.5",
+    "nuxt": "^3.6.1",
     "prettier": "^2.8.8",
     "sass": "^1.63.3",
     "semantic-release": "^20.1.0",
