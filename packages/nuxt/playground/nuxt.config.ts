@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['../../packages/nuxt/module'],
+  modules: ['../src/module'],
   mtVSafeHtml: {
     defaultString: '123'
   },
