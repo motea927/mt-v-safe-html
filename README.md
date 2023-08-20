@@ -1,7 +1,7 @@
 
 <p align="center">
   <a href="https://mt-v-safe-html.morty.tw">
-  <img src="https://raw.githubusercontent.com/motea927/mt-v-safe-html/main/packages/docs/public/mt-v-safe-html.png" style="width: 200px; height:auto;">
+  <img src="https://raw.githubusercontent.com/motea927/mt-v-safe-html/main/docs/public/mt-v-safe-html.png" style="width: 200px; height:auto;">
   </a>
 </p>
 
