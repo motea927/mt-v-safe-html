@@ -1,8 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
-import { createI18n } from 'vue-i18n'
 import type { Options, BindingObj } from '../../shared'
-import { setGlobalOptions, createSafeHtml, createI18nHtml } from '../../index'
+import { setGlobalOptions, createSafeHtml } from '../../index'
 
 beforeEach(() => {
   setGlobalOptions(undefined)
@@ -181,53 +180,5 @@ describe('$safeHtml', () => {
       expect(noConfigWrapper.find('a').attributes('target')).toBeFalsy()
       expect(configWrapper.find('a').attributes('target')).toContain('_blank')
     })
-  })
-})
-
-const mountWithI18nHtml = (message: string, globalOptions?: Options) => {
-  const Component = {
-    template: `<div v-html="$i18nHtml('hello')"></div>`
-  }
-
-  return shallowMount(Component, {
-    global: {
-      plugins: [
-        [createI18nHtml, globalOptions],
-        [
-          createI18n({
-            legacy: false,
-            locale: 'en',
-            fallbackLocale: 'en',
-            globalInjection: true,
-            messages: {
-              en: {
-                hello: message
-              }
-            }
-          })
-        ]
-      ]
-    }
-  })
-}
-
-describe('$i18nHtml', () => {
-  it('Render correct when use normal message', () => {
-    const message = '<p>i18n message</p>'
-    const wrapper = mountWithI18nHtml(message)
-    expect(wrapper.html()).toContain(message)
-  })
-
-  it('Render default string when use not match message', () => {
-    const defaultString = 'globalDefaultString'
-    const message = '<p>i18n message</p></p>'
-    const wrapper = mountWithI18nHtml(message, { defaultString })
-    expect(wrapper.html()).toContain(defaultString)
-  })
-
-  it('Render sanitize result when use not match message without defaultString', () => {
-    const message = '<p>i18n message</p></p>'
-    const wrapper = mountWithI18nHtml(message)
-    expect(wrapper.html()).toContain('<p>i18n message</p>')
   })
 })

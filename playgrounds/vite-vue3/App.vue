@@ -8,7 +8,6 @@
     <div>
       <h2>i18n</h2>
       <p v-html="$safeHtml(`<p style='color: red;'>123</p>`)"></p>
-      <p v-html="$i18nHtml('message')"></p>
       <button @click="handleClickChangeMessage">change message</button>
     </div>
   </div>
