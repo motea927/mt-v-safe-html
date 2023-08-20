@@ -1,6 +1,6 @@
 {
   "name": "mt-v-safe-html-nuxt",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A lightweight, flexible, and robust XSS sanitizer's Vue plugin based on DOMPurify for nuxt",
   "license": "MIT",
   "type": "module",
