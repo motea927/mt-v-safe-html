@@ -1,0 +1,36 @@
+---
+title: mt-v-safe-html
+description: A good guard method before using v-html.
+template: splash
+hero:
+  tagline: A lightweight, flexible, and robust XSS sanitizer's Vue directive based on DOMPurify.
+  image:
+    file: ../../assets/mt-v-safe-html.png
+  actions:
+    - text: Get started
+      link: /guides/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: Open on GitHub
+      link: https://github.com/motea927/mt-v-safe-html
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components'
+
+## Features
+
+<CardGrid stagger>
+  <Card title='Lightweight' icon='pencil'>
+    The bundle size is less than 9kb when gzipped.
+  </Card>
+  <Card title='Flexible' icon='add-document'>
+    Supports global configuration and allows for overriding in individual
+    components.
+  </Card>
+  <Card title='Robust' icon='setting'>
+    Provides support for a default string. If the sanitized tag counts does not
+    match the original HTML, you can choose to display the default string or the
+    result from DOMPurify.
+  </Card>
+</CardGrid>

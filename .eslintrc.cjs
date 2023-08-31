@@ -18,5 +18,5 @@ module.exports = {
     'unicorn/no-null': 0,
     'import/named': 0
   },
-  ignorePatterns: ['**/dist/**/**.*', '**/pnpm-lock.yaml']
+  ignorePatterns: ['**/dist/**/**.*', '**/pnpm-lock.yaml', 'env.d.ts']
 }
