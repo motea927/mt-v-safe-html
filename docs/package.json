@@ -1,19 +1,17 @@
 {
-  "name": "docus-starter",
-  "version": "0.1.0",
-  "private": true,
+  "name": "astro-mt-v-safe",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "nuxi dev",
-    "build": "nuxi build",
-    "generate": "nuxi generate",
-    "preview": "nuxi preview",
-    "lint": "eslint ."
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "devDependencies": {
-    "@nuxt-themes/docus": "^1.12.1",
-    "@nuxt/devtools": "^0.5.5",
-    "@nuxt/eslint-config": "^0.1.1",
-    "@nuxtjs/plausible": "^0.2.1",
-    "nuxt": "^3.5.3"
+  "dependencies": {
+    "@astrojs/starlight": "^0.8.0",
+    "astro": "^2.10.5",
+    "sharp": "^0.32.3"
   }
 }

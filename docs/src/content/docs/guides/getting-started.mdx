@@ -1,0 +1,78 @@
+---
+title: Getting Started
+description: A good guard method before using v-html.
+---
+
+Let's get started with mt-v-safe-html.
+
+## Play online
+
+You can start playing with mt-v-safe-html in your browser using Stackblitz:
+
+<a
+  href="https://stackblitz.com/edit/mt-v-safe-html?file=src%2FApp.vue"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Play on StackBlitz
+</a>
+
+## Installation
+
+1. Install the dependencies in the `docs` folder:
+
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+<Tabs>
+
+<TabItem label='npm'>
+
+```bash
+npm install --save mt-v-safe-html
+```
+
+</TabItem>
+
+<TabItem label='yarn'>
+
+```bash
+yarn add mt-v-safe-html
+```
+
+</TabItem>
+
+<TabItem label='pnpm'>
+
+```bash
+pnpm add mt-v-safe-html
+```
+
+</TabItem>
+</Tabs>
+
+## Usage Example
+
+This page is a very basic usage example, for more amazing usage, please reference next page.
+
+### Global usage
+
+#### safeHtml
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { createSafeHtml } from 'mt-v-safe-html'
+
+import App from './App.vue'
+
+createApp(App)
+  .use(createSafeHtml, { defaultString: 'Please update your text' })
+  .mount('#app')
+```
+
+```vue
+<template>
+  <div v-html="$safeHtml('<div>something</div></div>')"></div>
+  <div v-html="$safeHtml(() => $t('contact-us'))"></div>
+</template>
+```

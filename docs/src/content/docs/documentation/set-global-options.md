@@ -1,7 +1,12 @@
-# setGlobalOptions
+---
+title: $safeHtml
+description: create-safe-html
+---
+
 Sometimes, we need to update globalOptions, we provide `setGlobalOptions` to override and update options.
 
 ## Type
+
 ```ts
 type Options = {
   defaultString?: string
@@ -10,6 +15,7 @@ type Options = {
 ```
 
 ## Usage
+
 ```vue
 <template>
   <div v-html="$safeHtml(inValidHtmlString)"></div>
@@ -17,16 +23,15 @@ type Options = {
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { setGlobalOptions } from 'mt-v-safe-html'
+  import { ref } from 'vue'
+  import { setGlobalOptions } from 'mt-v-safe-html'
 
-const inValidHtmlString = ref(`
+  const inValidHtmlString = ref(`
     <div></div>invalid div</div>
-`);
+`)
 
-const handleClickChange = () => {
-  setGlobalOptions({ defaultString: 'new default string' })
-}
+  const handleClickChange = () => {
+    setGlobalOptions({ defaultString: 'new default string' })
+  }
 </script>
-
 ```

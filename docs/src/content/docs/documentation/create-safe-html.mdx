@@ -1,0 +1,134 @@
+---
+title: createSafeHtml
+description: create-safe-html
+---
+
+`createSafeHtml` return a vue plugin, it will inject global method `$safeHtml`.
+
+## Options
+
+| **Key**          | **Type**         | **Default** | **Description**                                                                                                                                                                                                      |
+| ---------------- | ---------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `defaultString`  | `string`         |             | Althrough DOMPurify can fix some tag error, but sometimes we want prevent tag error to render unexpected result, If the sanitized tag does not match the original HTML, you can choose to display the default string |
+| `sanitizeConfig` | `SanitizeConfig` |             | `DOMPurify.sanitize` 's config                                                                                                                                                                                       |
+
+```ts
+type Options = {
+  defaultString?: string
+  sanitizeConfig?: SanitizeConfig
+}
+```
+
+## Example for defaultString
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { createSafeHtml } from 'mt-v-safe-html'
+
+import App from './App.vue'
+
+createApp(App)
+  .use(createSafeHtml, {
+    defaultString: 'Content is updating..., try again later'
+  })
+  .mount('#app')
+```
+
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+<Tabs>
+
+<TabItem label='Vue Component'>
+
+```vue
+<template>
+  <div v-html="$safeHtml('<div>something</div></div>')"></div>
+</template>
+```
+
+</TabItem>
+
+<TabItem label='Render html'>
+
+```html
+<div>Content is updating..., try again later</div>
+```
+
+</TabItem>
+
+<TabItem label='pnpm'>
+
+```bash
+pnpm add mt-v-safe-html
+```
+
+</TabItem>
+</Tabs>
+
+import { Card } from '@astrojs/starlight/components'
+
+<Card title='info'>
+  ✨ Render result will be our `defaultString`, because original tag is `3`,
+  sanitized's tag is `2` (not matched).
+</Card>
+
+## Example for sanitizeConfig
+
+Just use like DOMPurify
+
+```ts
+// main.ts
+import { createApp } from 'vue'
+import { createSafeHtml } from 'mt-v-safe-html'
+import App from './App.vue'
+
+createApp(App)
+  .use(createSafeHtml, {
+    sanitizeConfig: { ADD_ATTR: ['target'] }
+  })
+  .mount('#app')
+```
+
+<Tabs>
+
+<TabItem label='Vue Component'>
+
+```vue
+<template>
+  <div v-html="$safeHtml(linkHtmlString)"></div>
+</template>
+
+<script setup lang="ts">
+  import { ref } from 'vue'
+  const linkHtmlString = ref(
+    `
+    <a href="https://github.com/motea927/mt-v-safe-html" target="_blank" rel="noopener noreferrer">
+      link
+    </a>
+  `
+  )
+</script>
+```
+
+</TabItem>
+
+<TabItem label='Render html'>
+
+```html
+<a
+  rel="noopener noreferrer"
+  target="_blank"
+  href="https://github.com/motea927/mt-v-safe-html"
+>
+  link
+</a>
+```
+
+</TabItem>
+
+</Tabs>
+
+<Card title='info'>
+  ✨ If you don't use `sanitizeConfig`, the `target="_blank"` will be sanitized.
+</Card>
